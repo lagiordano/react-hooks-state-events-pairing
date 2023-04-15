@@ -1,18 +1,29 @@
+import React, {useState} from "react";
+import VideoClip from "./VideoClip.js";
+import Details from "./Details.js";
+import CommentList from "./CommentList.js";
 import video from "../data/video.js";
 
+
 function App() {
-  console.log("Here's your data:", video);
+
+  console.log("Here's your data:", video)
+
+  const [areHidden, setAreHidden] = useState(false);
+
+  function handleHideClick () {
+    setAreHidden(!areHidden);
+  }
+
+  
 
   return (
+   
     <div className="App">
-      <iframe
-        width="919"
-        height="525"
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-        frameBorder="0"
-        allowFullScreen
-        title="Thinking in React"
-      />
+      <VideoClip url={video.embedUrl} title={video.title} />
+      <Details video={video} onHideClick={handleHideClick} areHidden={areHidden}/>
+      <CommentList comments={video.comments} areHidden={areHidden}/>
+      
     </div>
   );
 }
